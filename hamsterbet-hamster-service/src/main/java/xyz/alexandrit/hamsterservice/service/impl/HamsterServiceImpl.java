@@ -110,8 +110,15 @@ public class HamsterServiceImpl implements HamsterService {
 
     @Override
     public HamsterDeletedResponseDTO deleteById(Long hamsterId) {
-        hamsterRepository.deleteById(hamsterId);
+        HamsterDeletedResponseDTO response = new HamsterDeletedResponseDTO();
+        response.setHamsterId(hamsterId);
 
-        return new HamsterDeletedResponseDTO();
+        if (!hamsterRepository.existsById(hamsterId)) {
+            response.setDeleted(false);
+        } else {
+            hamsterRepository.deleteById(hamsterId);
+        }
+
+        return response;
     }
 }
