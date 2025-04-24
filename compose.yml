@@ -1,0 +1,11 @@
+
+services:
+  hamster_db:
+    image: postgres:latest
+    container_name: hamster_db_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: hamster_db
+    ports:
+      - "5432:5432"

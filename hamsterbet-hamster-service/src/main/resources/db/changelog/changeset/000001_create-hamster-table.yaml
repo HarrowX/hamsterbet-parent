@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-hamster-table
+      author: harrow
+      changes:
+        - createTable:
+            tableName: "hamsters"
+            columns:
+              - column:
+                  name: hamster_id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: weight
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: strength
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: int
+                  constraints:
+                    nullable: false

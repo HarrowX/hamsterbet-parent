@@ -1,0 +1,6 @@
+spring:
+  sql:
+    init:
+      mode: always
+  liquibase:
+    enabled: true
