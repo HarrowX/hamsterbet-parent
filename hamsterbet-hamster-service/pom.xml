@@ -48,6 +48,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
         <dependency>
             <groupId>xyz.alexandrit</groupId>
             <artifactId>hamsterbet-common</artifactId>

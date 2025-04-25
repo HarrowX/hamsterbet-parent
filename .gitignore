@@ -12,6 +12,32 @@ target/
 *.iml
 *.ipr
 
+### Frontend ###
+hamsterbet-frontend/logs
+hamsterbet-frontend/*.log
+hamsterbet-frontend/npm-debug.log*
+hamsterbet-frontend/yarn-debug.log*
+hamsterbet-frontend/yarn-error.log*
+hamsterbet-frontend/pnpm-debug.log*
+hamsterbet-frontend/lerna-debug.log*
+
+hamsterbet-frontend/node_modules
+hamsterbet-frontend/dist
+hamsterbet-frontend/dist-ssr
+hamsterbet-frontend/*.local
+
+
+hamsterbet-frontend/.vscode/*
+hamsterbet-frontend/!.vscode/extensions.json
+hamsterbet-frontend/.idea
+hamsterbet-frontend/.DS_Store
+hamsterbet-frontend/*.suo
+hamsterbet-frontend/*.ntvs*
+hamsterbet-frontend/*.njsproj
+hamsterbet-frontend/*.sln
+hamsterbet-frontend/*.sw?
+
+
 ### Eclipse ###
 .apt_generated
 .classpath
