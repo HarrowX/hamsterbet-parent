@@ -7,10 +7,14 @@
 
 ### Основной бизнес процесс
 Им является проведение хомячьих боёв:
-    ![Image alt](https://github.com/HarrowX/hamsterbet-parent/blob/master/image/bpmn-main.svg)
+    ![Проведение хомячьих боев](https://github.com/HarrowX/hamsterbet-parent/blob/master/image/bpmn-main.svg)
 
 
 ### Вторичные бизнес процессы
 Объявление хомячьих боев
-    ![Image alt](https://github.com/HarrowX/hamsterbet-parent/blob/master/image/bpmn.svg)
+    ![Объявление хомячьих боев](https://github.com/HarrowX/hamsterbet-parent/blob/master/image/bpmn.svg)
 
+
+## Схемы базы данных
+### Общая схема базы данных
+![Общая схема базы данных](https://github.com/HarrowX/hamsterbet-parent/blob/master/image/db.png)
