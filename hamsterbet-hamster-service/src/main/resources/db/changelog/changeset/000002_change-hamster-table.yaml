@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 000002-change-hamster-table
+      author: harrow
+      changes:
+        - dropColumn:
+            tableName: hamsters
+            columns:
+              - column:
+                  name: strength
+        - addColumn:
+            tableName: hamsters
+            columns:
+              - column:
+                  name: wins_count
+                  type: int
+                  constraints:
+                    nullable: false
+                  defaultValueNumeric: "0"
+              - column:
+                  name: losses_count
+                  type: int
+                  constraints:
+                    nullable: false
+                  defaultValueNumeric: "0"
+              - column:
+                  name: status
+                  type: varchar
+                  constraints:
+                    nullable: false
+                  defaultValue: "AVALIABLE"
+        - renameColumn:
+            tableName: hamsters
+            oldColumnName: weightInGrams
+            newColumnName: weight_in_grams

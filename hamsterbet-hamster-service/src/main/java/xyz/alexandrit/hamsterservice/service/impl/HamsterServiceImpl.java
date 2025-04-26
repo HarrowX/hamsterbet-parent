@@ -29,8 +29,7 @@ public class HamsterServiceImpl implements HamsterService {
 
         hamster.setName(hamsterRegisterRequestDTO.getName());
         hamster.setAge(hamsterRegisterRequestDTO.getAge());
-        hamster.setWeight(hamsterRegisterRequestDTO.getWeight());
-        hamster.setStrength(hamsterRegisterRequestDTO.getStrength());
+        hamster.setWeightInGrams(hamsterRegisterRequestDTO.getWeightInGrams());
 
         var hamsterInDB = hamsterRepository.save(hamster);
 
@@ -50,8 +49,10 @@ public class HamsterServiceImpl implements HamsterService {
             responseDTO.setHamsterId(hamster.getId());
             responseDTO.setName(hamster.getName());
             responseDTO.setAge(hamster.getAge());
-            responseDTO.setWeight(hamster.getWeight());
-            responseDTO.setStrength(hamster.getStrength());
+            responseDTO.setWeightInGrams(hamster.getWeightInGrams());
+            responseDTO.setLossesCount(hamster.getLossesCount());
+            responseDTO.setWinsCount(hamster.getWinsCount());
+            responseDTO.setStatus(hamster.getStatus());
 
             return responseDTO;
 
@@ -73,8 +74,10 @@ public class HamsterServiceImpl implements HamsterService {
         responseDTO.setHamsterId(hamster.getId());
         responseDTO.setName(hamster.getName());
         responseDTO.setAge(hamster.getAge());
-        responseDTO.setWeight(hamster.getWeight());
-        responseDTO.setStrength(hamster.getStrength());
+        responseDTO.setWeightInGrams(hamster.getWeightInGrams());
+        responseDTO.setLossesCount(hamster.getLossesCount());
+        responseDTO.setWinsCount(hamster.getWinsCount());
+        responseDTO.setStatus(hamster.getStatus());
 
         return responseDTO;
     }
@@ -92,8 +95,8 @@ public class HamsterServiceImpl implements HamsterService {
 
         hamster.setName(hamsterUpdateRequestDTO.getName()  != null ? hamsterUpdateRequestDTO.getName() : hamster.getName());
         hamster.setAge(hamsterUpdateRequestDTO.getAge() != null ? hamsterUpdateRequestDTO.getAge() : hamster.getAge());
-        hamster.setWeight(hamsterUpdateRequestDTO.getWeight() != null ? hamsterUpdateRequestDTO.getWeight() : hamster.getWeight());
-        hamster.setStrength(hamsterUpdateRequestDTO.getStrength() != null ? hamsterUpdateRequestDTO.getStrength() : hamster.getStrength());
+        hamster.setWeightInGrams(hamsterUpdateRequestDTO.getWeightInGrams() != null ? hamsterUpdateRequestDTO.getWeightInGrams() : hamster.getWeightInGrams());
+        hamster.setStatus(hamsterUpdateRequestDTO.getStatus() != null ? hamsterUpdateRequestDTO.getStatus() : hamster.getStatus());
 
         var hamsterInDB = hamsterRepository.save(hamster);
 
@@ -102,8 +105,10 @@ public class HamsterServiceImpl implements HamsterService {
         responseDTO.setHamsterId(hamsterInDB.getId());
         responseDTO.setName(hamsterInDB.getName());
         responseDTO.setAge(hamsterInDB.getAge());
-        responseDTO.setWeight(hamsterInDB.getWeight());
-        responseDTO.setStrength(hamsterInDB.getStrength());
+        responseDTO.setWeightInGrams(hamsterInDB.getWeightInGrams());
+        responseDTO.setLossesCount(hamsterInDB.getLossesCount());
+        responseDTO.setWinsCount(hamsterInDB.getWinsCount());
+        responseDTO.setStatus(hamsterInDB.getStatus());
 
         return responseDTO;
     }
@@ -113,10 +118,12 @@ public class HamsterServiceImpl implements HamsterService {
         HamsterDeletedResponseDTO response = new HamsterDeletedResponseDTO();
         response.setHamsterId(hamsterId);
 
+
         if (!hamsterRepository.existsById(hamsterId)) {
             response.setDeleted(false);
         } else {
             hamsterRepository.deleteById(hamsterId);
+            response.setDeleted(true);
         }
 
         return response;

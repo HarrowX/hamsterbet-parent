@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-hamster-table
+      id: 000001-create-hamster-table
       author: harrow
       changes:
         - createTable:
-            tableName: "hamsters"
+            tableName: hamsters
             columns:
               - column:
                   name: hamster_id
@@ -19,7 +19,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: weight
+                  name: weightInGrams
                   type: double
                   constraints:
                     nullable: false

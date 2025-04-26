@@ -1,9 +1,8 @@
 services:
   hamster-service:
     build:
-      context: ./hamsterbet-hamster-service
-      dockerfile: Dockerfile
-      no_cache: true
+      context: .
+      dockerfile: ./hamsterbet-hamster-service/Dockerfile
     container_name: hamster_service
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://hamster_db:5432/hamster_db
@@ -12,6 +11,8 @@ services:
       SPRING_JPA_HIBERNATE_DDL-AUTO: none
     networks:
       - hamsterbet-internal-network
+    ports:
+      - "8080:8080"
     depends_on:
       hamster_db:
         condition: service_healthy
