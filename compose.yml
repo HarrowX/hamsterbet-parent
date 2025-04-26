@@ -1,5 +1,21 @@
-
 services:
+  hamster-service:
+    build:
+      context: ./hamsterbet-hamster-service
+      dockerfile: Dockerfile
+      no_cache: true
+    container_name: hamster_service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://hamster_db:5432/hamster_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+      SPRING_JPA_HIBERNATE_DDL-AUTO: none
+    networks:
+      - hamsterbet-internal-network
+    depends_on:
+      hamster_db:
+        condition: service_healthy
+
   hamster_db:
     image: postgres:latest
     container_name: hamster_db_postgres
@@ -9,3 +25,18 @@ services:
       POSTGRES_DB: hamster_db
     ports:
       - "5432:5432"
+    networks:
+      - hamsterbet-internal-network
+    volumes:
+      - hamster_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  hamsterbet-internal-network:
+    driver: bridge
+volumes:
+  hamster_data:
