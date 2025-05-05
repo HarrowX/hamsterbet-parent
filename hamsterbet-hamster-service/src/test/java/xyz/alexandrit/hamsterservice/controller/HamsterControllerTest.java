@@ -72,11 +72,11 @@ class HamsterControllerTest {
                         content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON),
                         jsonPath("$[0].hamsterId").value(hamsterIds.get("anton")),
                         jsonPath("$[0].name").value("anton"),
-                        jsonPath("$[0].weight").value(126.0),
+                        jsonPath("$[0].weightInGrams").value(126.0),
                         jsonPath("$[0].age").value(1),
                         jsonPath("$[1].hamsterId").value(hamsterIds.get("mark")),
                         jsonPath("$[1].name").value("mark"),
-                        jsonPath("$[1].weight").value(176.5),
+                        jsonPath("$[1].weightInGrams").value(176.5),
                         jsonPath("$[1].age").value(3)
 
                 );
@@ -90,7 +90,7 @@ class HamsterControllerTest {
                         content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON),
                         jsonPath("$.hamsterId").value(hamsterIds.get("anton")),
                         jsonPath("$.name").value("anton"),
-                        jsonPath("$.weight").value(126.0),
+                        jsonPath("$.weightInGrams").value(126.0),
                         jsonPath("$.age").value(1)
                 );
     }
@@ -107,7 +107,7 @@ class HamsterControllerTest {
         String newHamsterJson = """
                 {
                     "name": "newbie",
-                    "weight": 150.0,
+                    "weightInGrams": 150.0,
                     "age": 2
                 }
                 """;
@@ -130,7 +130,7 @@ class HamsterControllerTest {
         String invalidHamsterJson = """
                 {
                     "name": "",
-                    "weight": -1.0,
+                    "weightInGrams": -1.0,
                     "age": 11
                 }
                 """;
@@ -146,7 +146,7 @@ class HamsterControllerTest {
         String updateHamsterJson = """
                 {
                     "name": "updated anton",
-                    "weight": 130.0,
+                    "weightInGrams": 130.0,
                     "age": 2
                 }
                 """;
@@ -159,7 +159,7 @@ class HamsterControllerTest {
                         content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON),
                         jsonPath("$.hamsterId").value(hamsterIds.get("anton")),
                         jsonPath("$.name").value("updated anton"),
-                        jsonPath("$.weight").value(130.0),
+                        jsonPath("$.weightInGrams").value(130.0),
                         jsonPath("$.age").value(2)
                 );
 
@@ -173,7 +173,7 @@ class HamsterControllerTest {
         String updateHamsterJson = """
                 {
                     "name": "non-existent",
-                    "weight": 100.0,
+                    "weightInGrams": 100.0,
                     "age": 1
                 }
                 """;
@@ -189,7 +189,7 @@ class HamsterControllerTest {
         String invalidHamsterJson = """
                 {
                     "name": "",
-                    "weight": -1.0,
+                    "weightInGrams": -1.0,
                     "age": 11
                 }
                 """;

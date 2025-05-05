@@ -11,6 +11,7 @@ import xyz.alexandrit.common.dto.response.HamsterRegisterResponseDTO;
 import xyz.alexandrit.common.dto.response.HamsterResponseDTO;
 import xyz.alexandrit.hamsterservice.entity.Hamster;
 import xyz.alexandrit.hamsterservice.exception.HamsterNotFoundException;
+import xyz.alexandrit.hamsterservice.mapper.HamsterMapper;
 import xyz.alexandrit.hamsterservice.repository.HamsterRepository;
 import xyz.alexandrit.hamsterservice.service.HamsterService;
 
@@ -22,6 +23,7 @@ import java.util.List;
 public class HamsterServiceImpl implements HamsterService {
 
     private final HamsterRepository hamsterRepository;
+    private final HamsterMapper hamsterMapper;
 
     @Override
     public HamsterRegisterResponseDTO save(HamsterRegisterRequestDTO hamsterRegisterRequestDTO) {
@@ -42,44 +44,19 @@ public class HamsterServiceImpl implements HamsterService {
     @Override
     public List<HamsterResponseDTO> findAll() {
         var hamsters = hamsterRepository.findAll();
-        return hamsters.stream().map(hamster->{
-
-            var responseDTO = new HamsterResponseDTO();
-
-            responseDTO.setHamsterId(hamster.getId());
-            responseDTO.setName(hamster.getName());
-            responseDTO.setAge(hamster.getAge());
-            responseDTO.setWeightInGrams(hamster.getWeightInGrams());
-            responseDTO.setLossesCount(hamster.getLossesCount());
-            responseDTO.setWinsCount(hamster.getWinsCount());
-            responseDTO.setStatus(hamster.getStatus());
-
-            return responseDTO;
-
-        }).toList();
+        return hamsters.stream().map(hamsterMapper::toHamsterResponseDTO).toList();
 
     }
 
     @Override
     public HamsterResponseDTO findById(Long hamsterId) {
         var hamsterContainer = hamsterRepository.findById(hamsterId);
-
-        if (hamsterContainer.isEmpty()) {
-            throw new HamsterNotFoundException(String.format("Hamster with id %s not found", hamsterId));
-        }
-
-        var hamster = hamsterContainer.get();
-        var responseDTO = new HamsterResponseDTO();
-
-        responseDTO.setHamsterId(hamster.getId());
-        responseDTO.setName(hamster.getName());
-        responseDTO.setAge(hamster.getAge());
-        responseDTO.setWeightInGrams(hamster.getWeightInGrams());
-        responseDTO.setLossesCount(hamster.getLossesCount());
-        responseDTO.setWinsCount(hamster.getWinsCount());
-        responseDTO.setStatus(hamster.getStatus());
-
-        return responseDTO;
+        
+        return hamsterMapper.toHamsterResponseDTO(
+                hamsterContainer.orElseThrow(
+                        () -> new HamsterNotFoundException(String.format("Hamster with id %s not found", hamsterId))
+                )
+        );
     }
 
     @Override
@@ -100,17 +77,7 @@ public class HamsterServiceImpl implements HamsterService {
 
         var hamsterInDB = hamsterRepository.save(hamster);
 
-        var responseDTO = new HamsterResponseDTO();
-
-        responseDTO.setHamsterId(hamsterInDB.getId());
-        responseDTO.setName(hamsterInDB.getName());
-        responseDTO.setAge(hamsterInDB.getAge());
-        responseDTO.setWeightInGrams(hamsterInDB.getWeightInGrams());
-        responseDTO.setLossesCount(hamsterInDB.getLossesCount());
-        responseDTO.setWinsCount(hamsterInDB.getWinsCount());
-        responseDTO.setStatus(hamsterInDB.getStatus());
-
-        return responseDTO;
+        return hamsterMapper.toHamsterResponseDTO(hamsterInDB);
     }
 
     @Override
